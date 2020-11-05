@@ -18,5 +18,16 @@ export default (sequelize, DataTypes) => {
     tableName: 'Comment',
   });
 
+  Comment.associate = (models) => {
+    Comment.belongsTo(models.Issue, {
+      as: 'rootIssue',
+      foreignKey: 'issueId',
+    });
+    Comment.belongsTo(models.User, {
+      as: 'author',
+      foreignKey: 'authorId',
+    });
+  };
+
   return Comment;
 };
